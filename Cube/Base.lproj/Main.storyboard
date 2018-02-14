@@ -29,7 +29,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfu-6W-Fbr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="i3i-3z-BMv">
                     <connections>
-                        <action selector="doubleTap:" destination="LFS-Tc-oy3" id="dfX-y2-afg"/>
+                        <action selector="DoubleTap:" destination="LFS-Tc-oy3" id="rht-6p-3hM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
