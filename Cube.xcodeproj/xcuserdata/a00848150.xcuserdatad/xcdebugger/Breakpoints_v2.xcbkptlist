@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../_2rotatingcube/ViewController.m"
-            timestampString = "540329871.157618"
+            timestampString = "540332770.965189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "-doubletapRecognized:"
             landmarkType = "7">
          </BreakpointContent>
