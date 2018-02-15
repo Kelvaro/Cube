@@ -36,6 +36,8 @@ enum
     GLKMatrix4 mvp;
     GLKMatrix3 normalMatrix;
 
+    float x;
+    float y;
     float rotAngle;
     char isRotating;
     bool Toggle;
@@ -94,6 +96,8 @@ enum
     // Perspective
     mvp = GLKMatrix4Translate(GLKMatrix4Identity, 0.0, 0.0, -5.0);
     mvp = GLKMatrix4Rotate(mvp, rotAngle, 1.0, 0.0, 0.0 );
+    mvp = GLKMatrix4Rotate(mvp, x, 0.0, 1.0, 0.0);
+    mvp = GLKMatrix4Rotate(mvp, y, 1.0, 0.0, 0.0);
     normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(mvp), NULL);
 
     float aspect = (float)theView.drawableWidth / (float)theView.drawableHeight;
@@ -106,6 +110,21 @@ enum
 -(void)toggle {
     
     Toggle =!Toggle;
+    
+}
+
+
+-(void)rotate:(UIPanGestureRecognizer *)sender {
+    CGPoint translation = [sender translationInView:sender.view];
+    if(Toggle = false){ return;
+        
+    }
+    
+    NSLog(@"this method is being called");
+    
+    x = translation.x/sender.view.frame.size.width;
+    y = translation.y/sender.view.frame.size.height;
+    
     
 }
 

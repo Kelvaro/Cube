@@ -16,15 +16,33 @@
 
 @implementation ViewController
 
-- (IBAction)theButton:(id)sender {
-    NSLog(@"You pressed the Button!");
+-(void) addGestureRecognizers {
+    
+    UITapGestureRecognizer *doubletapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubletapRecognized:)];
+    [doubletapRecognizer setNumberOfTapsRequired:2];
+    [self.view addGestureRecognizer:(doubletapRecognizer)];
+    
 }
 
+-(IBAction) doubletapRecognized:(UITapGestureRecognizer*) recognizer{
+    if(recognizer.state == UIGestureRecognizerStateRecognized){
+        
+        NSLog(@"double tap is working");
+        [glesRenderer toggle];
+        
+    }
+}
 
-- (IBAction)doubleTap:(UITapGestureRecognizer *)sender {
-    NSLog(@"Double Tap works");
+- (IBAction)panRotate:(UIPanGestureRecognizer *)sender {
     
-    [glesRenderer toggle];
+    NSLog(@"Panning recongized");
+    [glesRenderer rotate:(UIPanGestureRecognizer*)sender];
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -37,7 +55,7 @@
     GLKView *view = (GLKView *)self.view;
     [glesRenderer setup:view];
     [glesRenderer loadModels];
-  
+    [self addGestureRecognizers];
     // ### >>>
 }
 

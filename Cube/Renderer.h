@@ -13,6 +13,7 @@
 - (void)update;
 - (void)draw:(CGRect)drawRect;
 - (void)toggle;
+- (void)rotate:(id)sender;
 @end
 
 #endif /* Renderer_h */
