@@ -24,8 +24,7 @@
 - (IBAction)doubleTap:(UITapGestureRecognizer *)sender {
     NSLog(@"Double Tap works");
     
-  
-    
+    [glesRenderer toggle];
 }
 
 

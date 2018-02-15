@@ -93,7 +93,7 @@ enum
 
     // Perspective
     mvp = GLKMatrix4Translate(GLKMatrix4Identity, 0.0, 0.0, -5.0);
-    mvp = GLKMatrix4Rotate(mvp, rotAngle, 1.0, 0.0, 1.0 );
+    mvp = GLKMatrix4Rotate(mvp, rotAngle, 1.0, 0.0, 0.0 );
     normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(mvp), NULL);
 
     float aspect = (float)theView.drawableWidth / (float)theView.drawableHeight;
