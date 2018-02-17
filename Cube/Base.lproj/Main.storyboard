@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LFS-Tc-oy3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LFS-Tc-oy3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,13 +22,27 @@
                                 <rect key="frame" x="168" y="515" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="reset:" destination="LFS-Tc-oy3" eventType="touchUpInside" id="5ZQ-B5-ZX6"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-2T-oNa">
+                                <rect key="frame" x="16" y="33" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="displayX:" destination="LFS-Tc-oy3" eventType="editingDidEnd" id="0R2-7Q-22m"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="KPY-ie-m6O"/>
                         <connections>
                             <outlet property="delegate" destination="LFS-Tc-oy3" id="YOW-vF-avX"/>
                             <outletCollection property="gestureRecognizers" destination="Z7M-0s-dRN" appends="YES" id="7ao-kK-c4v"/>
+                            <outletCollection property="gestureRecognizers" destination="HeY-8d-B92" appends="YES" id="kNv-m0-Tif"/>
                         </connections>
                     </glkView>
                 </glkViewController>
@@ -38,6 +52,11 @@
                         <action selector="panRotate:" destination="LFS-Tc-oy3" id="Xax-Rf-IK6"/>
                     </connections>
                 </panGestureRecognizer>
+                <pinchGestureRecognizer id="HeY-8d-B92">
+                    <connections>
+                        <action selector="pinchScale:" destination="LFS-Tc-oy3" id="BOr-xU-amr"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="46" y="40"/>
         </scene>

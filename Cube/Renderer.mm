@@ -36,8 +36,15 @@ enum
     GLKMatrix4 mvp;
     GLKMatrix3 normalMatrix;
 
+    
+    float scale;
+    float lastscale;
+    float _scaleStart;
+    float _scaleEnd;
     float x;
     float y;
+    float xp;
+    float yp;
     float rotAngle;
     char isRotating;
     bool Toggle;
@@ -62,7 +69,10 @@ enum
 - (void)setup:(GLKView *)view
 {
     view.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    
+    scale = 1.0;
+    lastscale = 1.0;
+    xp = 0.0;
+    yp = 0.0;
     if (!view.context) {
         NSLog(@"Failed to create ES context");
     }
@@ -86,20 +96,24 @@ enum
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
     lastTime = currentTime;
     
-    if (Toggle)
+    if (Toggle == true)
     {
         rotAngle += 0.001f * elapsedTime;
         if (rotAngle >= 360.0f)
             rotAngle = 0.0f;
     }
 
+ 
     // Perspective
-    mvp = GLKMatrix4Translate(GLKMatrix4Identity, 0.0, 0.0, -5.0);
+    mvp = GLKMatrix4Translate(GLKMatrix4Identity, xp, -yp, -5.0);
+   // mvp = GLKMatrix4Translate(GLKMatrix4Identity, 0.0, 0.0, -5.0);
+  
     mvp = GLKMatrix4Rotate(mvp, rotAngle, 1.0, 0.0, 0.0 );
     mvp = GLKMatrix4Rotate(mvp, x, 0.0, 1.0, 0.0);
     mvp = GLKMatrix4Rotate(mvp, y, 1.0, 0.0, 0.0);
+    mvp = GLKMatrix4Scale(mvp, 0.4 * scale, 0.4 * scale, 0.4 * scale);
     normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(mvp), NULL);
-
+   // mvp = GLKMatrix4Scale(mvp, _scaleEnd, _scaleEnd, _scaleEnd);
     float aspect = (float)theView.drawableWidth / (float)theView.drawableHeight;
     GLKMatrix4 perspective = GLKMatrix4MakePerspective(60.0f * M_PI / 180.0f, aspect, 1.0f, 20.0f);
 
@@ -116,18 +130,58 @@ enum
 
 -(void)rotate:(UIPanGestureRecognizer *)sender {
     CGPoint translation = [sender translationInView:sender.view];
-    if(Toggle = false){ return;
+    if(Toggle == false){
+        
+        
+        if(sender.numberOfTouches == 1){
+        NSLog(@"this method is being called");
+        
+        x =  translation.x/sender.view.frame.size.width;
+        y =  translation.y/sender.view.frame.size.height;
+     
+    }
+   if(sender.numberOfTouches == 2){
+       
+       NSLog(@"this double touch condition is being recognized");
+       xp = translation.x/sender.view.frame.size.width;
+       yp = translation.y/sender.view.frame.size.height;
+       
+   }
         
     }
     
-    NSLog(@"this method is being called");
-    
-    x = translation.x/sender.view.frame.size.width;
-    y = translation.y/sender.view.frame.size.height;
     
     
 }
+-(void)reset:(UIButton *)sender {
+    NSLog(@"this button is pressed");
+    x = 0.0;
+    y = 0.0;
+    scale =  1.0;
+    Toggle = false;
+    xp = 0.0;
+    yp = 0.0;
+    
+}
 
+- (void)pinch:(UIPinchGestureRecognizer*)sender{
+    NSLog(@"Scale %.1f", scale);
+    
+    if(Toggle == false){
+    if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded){
+       
+        scale = scale - (lastscale - sender.scale);
+        lastscale = sender.scale;
+  
+        }
+    }
+}
+
+- (void)Xpos:(UITextField *)sender{
+    
+    
+    
+}
 - (void)draw:(CGRect)drawRect;
 {
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, FALSE, (const float *)mvp.m);

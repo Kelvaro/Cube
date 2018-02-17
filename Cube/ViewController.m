@@ -38,14 +38,22 @@
     NSLog(@"Panning recongized");
     [glesRenderer rotate:(UIPanGestureRecognizer*)sender];
     
+}
+
+- (IBAction)pinchScale:(UIPinchGestureRecognizer *)sender {
+    [glesRenderer pinch:(UIPinchGestureRecognizer*)sender];
+    NSLog(@"pinch is being recognized here!");
     
-    
-    
-    
+}
+- (IBAction)displayX:(UITextField *)sender {
+    [glesRenderer Xpos:(UITextField *)sender];
     
 }
 
-
+- (IBAction)reset:(UIButton *)sender {
+    
+    [glesRenderer reset:(UIButton *)sender];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
